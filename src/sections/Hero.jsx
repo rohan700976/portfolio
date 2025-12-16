@@ -1,5 +1,5 @@
 import React from "react";
-import rohan from "../assets/heroImg/Rohan.jpg";
+import rohan from "../assets/heroImg/rohan.jpg";
 
 function Hero() {
   return (
