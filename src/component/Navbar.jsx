@@ -3,58 +3,101 @@ import React, { useState } from 'react'
 export default function Navbar() {
   const [open, setOpen] = useState(false)
 
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    setOpen(false)
+  }
+
   return (
     <header className="w-full bg-gradient-to-r from-[#0D1117] to-[#111827] text-white bg-fixed">
 
-      {/* Top bar: keep original desktop/laptop layout exactly as requested at md and above */}
-      <div className="flex items-center justify-between md:justify-between w-full px-4 md:px-0 md:h-18 h-auto">
+      {/* TOP BAR */}
+      <div className="
+        flex items-center justify-between
+        w-full
+        px-4 sm:px-6 lg:px-0
+        h-auto lg:h-18
+      ">
 
-        {/* Logo - preserved styles for md+ */}
-        <div>
-          <h1 className="text-3xl md:text-3xl font-bold md:mx-35 p-5 text-[#00FF88] [text-shadow:0_0_10px_rgba(0,255,136,0.6)]">
-            ROHAN
-          </h1>
-        </div>
+        {/* LOGO */}
+        <h1 className="
+          text-3xl font-bold
+          p-5
+          lg:mx-35
+          text-[#00FF88]
+          [text-shadow:0_0_10px_rgba(0,255,136,0.6)]
+        ">
+          ROHAN
+        </h1>
 
-        {/* Desktop / Laptop menu: VISIBLE on md and up. This block keeps classes used in your original code so layout on laptop/desktop remains identical. */}
-        <nav className="hidden md:flex justify-end gap-20 md:mx-35 p-5" aria-label="Primary navigation">
-          <span className='hover:underline hover:decoration-2 hover:underline-offset-4 transition-all duration-300 hover:text-[#00FF88]'>Home</span>
-          <span className='hover:underline hover:decoration-2 hover:underline-offset-4 transition-all duration-300 hover:text-[#00FF88]'>About</span>
-          <span className='hover:underline hover:decoration-2 hover:underline-offset-4 transition-all duration-300 hover:text-[#00FF88]'>Skills</span>
-          <span className='hover:underline hover:decoration-2 hover:underline-offset-4 transition-all duration-300 hover:text-[#00FF88]'>Project</span>
-          <span className='hover:underline hover:decoration-2 hover:underline-offset-4 transition-all duration-300 hover:text-[#00FF88]'>Experience</span>
-          <span className='hover:underline hover:decoration-2 hover:underline-offset-4 transition-all duration-300 hover:text-[#00FF88]'>Resume</span>
+        {/* DESKTOP MENU (Laptop / PC ONLY) */}
+        <nav className="hidden lg:flex justify-end gap-20 lg:mx-35 p-5">
+          <span className="hover:underline hover:text-[#00FF88] transition">Home</span>
+          <a href="#about" className="hover:underline hover:text-[#00FF88] transition">About</a>
+          <a href="#skills" className="hover:underline hover:text-[#00FF88] transition">Skills</a>
+          <a href="#project" className="hover:underline hover:text-[#00FF88] transition">Project</a>
+          <a href="#experience" className="hover:underline hover:text-[#00FF88] transition">Experience</a>
+
+          <a
+            href="/Rohan-Resume.pdf"
+            download
+            className="
+              inline-flex items-center gap-2
+              px-6 py-2 rounded-full
+              bg-[#00FF88] text-[#111827] font-semibold
+              shadow-[0_0_15px_rgba(0,255,136,0.5)]
+              hover:shadow-[0_0_30px_rgba(0,255,136,0.9)]
+              hover:scale-105 transition-all duration-300
+            "
+          >
+            Resume
+          </a>
         </nav>
 
-        {/* Mobile controls: VISIBLE below md. This will NOT affect md+ */}
-        <div className="md:hidden flex items-center p-2">
+        {/* HAMBURGER (Mobile + iPad + iPad Mini) */}
+        <div className="lg:hidden flex items-center p-2">
           <button
-            onClick={() => setOpen((s) => !s)}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            className="text-[#00FF88] text-3xl p-2 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00FF88]/60"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+            className="text-[#00FF88] text-3xl"
           >
-            {/* simple accessible hamburger / close icon */}
             {open ? '✕' : '☰'}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu panel: full-width, stacked items. Only rendered on small screens (hidden on md+). */}
+      {/* MOBILE / IPAD MENU */}
       <div
-        id="mobile-menu"
-        className={`md:hidden transition-all duration-300 origin-top ${open ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 pointer-events-none'}`}
-        aria-hidden={!open}
+        className={`
+          lg:hidden
+          overflow-hidden
+          transition-all duration-300 ease-in-out
+          ${open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
+        `}
       >
-        <nav className="flex flex-col bg-gradient-to-b from-[#0D1117]/90 to-[#111827]/90 px-6 pb-6 pt-2 gap-4" role="menu">
-          {/* Each button closes the menu when clicked (common mobile behaviour) */}
-          <button onClick={() => setOpen(false)} className='text-left py-2 text-lg hover:text-[#00FF88] transition'>Home</button>
-          <button onClick={() => setOpen(false)} className='text-left py-2 text-lg hover:text-[#00FF88] transition'>About</button>
-          <button onClick={() => setOpen(false)} className='text-left py-2 text-lg hover:text-[#00FF88] transition'>Skills</button>
-          <button onClick={() => setOpen(false)} className='text-left py-2 text-lg hover:text-[#00FF88] transition'>Project</button>
-          <button onClick={() => setOpen(false)} className='text-left py-2 text-lg hover:text-[#00FF88] transition'>Experience</button>
-          <button onClick={() => setOpen(false)} className='text-left py-2 text-lg hover:text-[#00FF88] transition'>Resume</button>
+        <nav className="
+          flex flex-col
+          bg-gradient-to-b from-[#0D1117]/95 to-[#111827]/95
+          px-6 py-6 gap-4
+        ">
+          <button onClick={() => scrollTo('home')} className="text-left text-lg hover:text-[#00FF88] transition">Home</button>
+          <button onClick={() => scrollTo('about')} className="text-left text-lg hover:text-[#00FF88] transition">About</button>
+          <button onClick={() => scrollTo('skills')} className="text-left text-lg hover:text-[#00FF88] transition">Skills</button>
+          <button onClick={() => scrollTo('project')} className="text-left text-lg hover:text-[#00FF88] transition">Project</button>
+          <button onClick={() => scrollTo('experience')} className="text-left text-lg hover:text-[#00FF88] transition">Experience</button>
+
+          <a
+            href="/Rohan-Resume.pdf"
+            download
+            className="
+              mt-2 inline-flex justify-center
+              px-6 py-3 rounded-full
+              bg-[#00FF88] text-[#111827] font-semibold
+              shadow-[0_0_20px_rgba(0,255,136,0.6)]
+            "
+          >
+            Resume
+          </a>
         </nav>
       </div>
 
