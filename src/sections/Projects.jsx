@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import styleLoop from "../assets/projectsImg/styleLoop.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import kisanmitra from '../assets/projectsImg/kisanmitra.png'
+import kisanmitra from '../assets/projectsImg/kisanMitra.png'
 import ezLandingPage from '../assets/projectsImg/ez.png'
 
 function Projects() {
